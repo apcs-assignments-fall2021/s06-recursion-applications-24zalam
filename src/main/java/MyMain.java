@@ -19,9 +19,23 @@ public class MyMain {
 
     // Tail recursive method:
     public static boolean binarySearchTR(int[] arr, int num, int lowerBound, int upperBound) {
-        // YOUR CODE HERE
-        return false;
+        int mid = lowerBound + ((upperBound - lowerBound)/ 2);
+
+        if (upperBound < lowerBound){
+            return false;
+        }
+        else if (arr[mid] > num){
+            return binarySearchTR(arr, num, lowerBound, mid-1);
+        }
+        else if (arr[mid] < num){
+            return binarySearchTR(arr, num, mid+1, upperBound);
+        }
+        else {
+            return true;
+        }
+
     }
+
 
 
 
@@ -66,9 +80,49 @@ public class MyMain {
 
     // We continue on until one of the arrays is empty
     // Then we need to copy the rest of the array
+//steps to take
+    //three variables
+    //cant have an index out of bounds error--dont want to run out of stuff
+    //find smaller number
+    //put in arr3
+    //if/else statements
+    //while loop?
 
     public static int[] merge(int[] arr1, int[] arr2) {
-        // YOUR CODE HERE
-        return null;
+        int arr3[]= new int[arr1.length+arr2.length];
+        int arr1index = 0;
+        int arr2index = 0;
+        int arr3index = 0;
+        //value of arr3
+        int value = Integer.MIN_VALUE;
+        //ok first need to establish for/while loop for both arrays; needs to continue until array runs out of things
+        while (arr1index <= arr1.length-1 || arr2index <= arr2.length-1) {
+            int diff1 = Integer.MAX_VALUE;
+            int diff2 = Integer.MAX_VALUE;
+
+            if (arr1index <= arr1.length-1) {
+                diff1 = arr1[arr1index] - value;
+            }
+
+            if (arr2index <= arr2.length-1) {
+                diff2 = arr2[arr2index] - value;
+            }
+           //if arr1 is less than arr2 needs to replace, value also gets replaced and then goes on and on
+            //then index needs to change to move on
+            if (diff1 < diff2) {
+                arr3[arr3index] = arr1[arr1index];
+                value = arr1[arr1index];
+                arr1index = arr1index + 1;
+                arr3index = arr3index + 1;
+//same thing, just with arr2
+            } else {
+                arr3[arr3index] = arr2[arr2index];
+                value = arr2[arr2index];
+                arr2index = arr2index + 1;
+                arr3index = arr3index + 1;
+            }
+        }
+        return arr3;
     }
 }
+
